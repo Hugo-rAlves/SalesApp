@@ -7,7 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
+@Table (name = "cliente")
+@Entity(name = "cliente")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -31,7 +32,7 @@ public class Cliente {
     private String telefone;
 
     @NotNull
-    private String UF;
+    private String uf;
 
     @NotNull
     private String localizacao;

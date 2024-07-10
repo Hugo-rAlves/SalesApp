@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface VendaRepository extends JpaRepository<Venda, Long> {
 
-    @Query("SELECT v FROM Venda v WHERE v.cliente.cnpj = :cnpj")
+    @Query("SELECT v FROM venda v WHERE v.cliente.cnpj = :cnpj")
     List<Venda> findByCnpj(@Param("cnpj") String cnpj);
 
 }
