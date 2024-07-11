@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class VendaController {
     private VendaMapper vendaMapper;
 
     @PostMapping
-    private ResponseEntity<Venda> cadastrarVenda(@RequestBody VendaDTO vendaDTO){
+    private ResponseEntity<Venda> cadastrarVenda(@RequestBody @Valid VendaDTO vendaDTO){
         Venda venda = vendaMapper.toEntity(vendaDTO);
         return ResponseEntity.ok(vendaService.save(venda));
     }
