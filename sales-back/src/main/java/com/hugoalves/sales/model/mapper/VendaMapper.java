@@ -1,5 +1,6 @@
 package com.hugoalves.sales.model.mapper;
 
+import com.hugoalves.sales.model.Cliente;
 import com.hugoalves.sales.model.Venda;
 import com.hugoalves.sales.model.dto.VendaDTO;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,6 @@ public class VendaMapper {
     public Venda toEntity(VendaDTO vendaDTO) {
         Venda venda = new Venda();
 
-        venda.setCliente(vendaDTO.cliente());
         venda.setData(vendaDTO.data());
         venda.setStatus(vendaDTO.status());
         venda.setValor(vendaDTO.valor());

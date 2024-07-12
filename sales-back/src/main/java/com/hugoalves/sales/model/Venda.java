@@ -34,4 +34,10 @@ public class Venda {
 
     @NotNull
     private double valor;
+
+    public Venda(LocalDate data, StatusPagamento status, double valor) {
+        this.data = data;
+        this.status = status;
+        this.valor = valor;
+    }
 }

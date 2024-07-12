@@ -24,8 +24,7 @@ public class VendaController {
 
     @PostMapping
     private ResponseEntity<Venda> cadastrarVenda(@RequestBody @Valid VendaDTO vendaDTO){
-        Venda venda = vendaMapper.toEntity(vendaDTO);
-        return ResponseEntity.ok(vendaService.save(venda));
+        return ResponseEntity.ok(vendaService.save(vendaDTO));
     }
 
     @GetMapping
@@ -46,9 +45,14 @@ public class VendaController {
         return ResponseEntity.ok(vendaMapper.toDto(venda));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     private ResponseEntity<Void> deletarVenda(@PathVariable Long id){
         vendaService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    private ResponseEntity<Venda> updateVenda(@PathVariable Long id, @RequestBody @Valid VendaDTO vendaDTO){
+        return ResponseEntity.ok(vendaService.updateById(id, vendaDTO));
     }
 }

@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import api from '../../services/api';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const ClienteForm = () => {
-  const [nome, setNome] = useState('');
-  const [cnpj, setCnpj] = useState('');
-  const [email, setEmail] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [uf, setUf] = useState('');
-  const [localizacao, setLocalizacao] = useState('');
+const ClienteEditModal = ({ cliente, closeModal }) => {
+  const [nome, setNome] = useState(cliente.nome);
+  const [cnpj, setCnpj] = useState(cliente.cnpj);
+  const [email, setEmail] = useState(cliente.email);
+  const [telefone, setTelefone] = useState(cliente.telefone);
+  const [uf, setUf] = useState(cliente.uf);
+  const [localizacao, setLocalizacao] = useState(cliente.localizacao);
   const [ufs, setUfs] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUfs = async () => {
@@ -28,11 +25,13 @@ const ClienteForm = () => {
     fetchUfs();
   }, []);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/cliente', { nome, cnpj, email, telefone, uf, localizacao });
-      navigate('/clientes');
+      await axios.put(`/cliente`, { nome, cnpj, email, telefone, uf, localizacao });
+      closeModal();
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +50,7 @@ const ClienteForm = () => {
   };
 
   return (
-    <div className="cliente-form">
+    <div className="cliente-edit-modal">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -65,7 +64,7 @@ const ClienteForm = () => {
           placeholder="CNPJ"
           value={cnpj}
           onChange={(e) => setCnpj(e.target.value)}
-          required
+          disabled
         />
         <input
           type="email"
@@ -102,10 +101,11 @@ const ClienteForm = () => {
             <LocationMarker />
           </MapContainer>
         </div>
-        <button type="submit">Cadastrar Cliente</button>
+        <button type="submit">Salvar Alterações</button>
+        <button type="button" onClick={closeModal}>Cancelar</button>
       </form>
     </div>
   );
 };
 
-export default ClienteForm;
+export default ClienteEditModal;

@@ -4,6 +4,6 @@ import com.hugoalves.sales.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Long> {
     UserDetails findByLogin(String login);
 }

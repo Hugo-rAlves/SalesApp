@@ -40,12 +40,15 @@ public class ClienteController {
         return ResponseEntity.ok(clienteMapper.toDto(cliente));
     }
 
-    @DeleteMapping("{cnpj}")
-    private ResponseEntity<Void> deletarCliente(@PathVariable String cnpj) {
-        clienteService.deleteByCnpj(cnpj);
+    @DeleteMapping("{id}")
+    private ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
+        clienteService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-
+    @PutMapping
+    private ResponseEntity<Cliente> atualizarCliente(@RequestBody @Valid ClienteDTO clienteDTO) {
+        return ResponseEntity.ok(clienteService.updateByCnpj(clienteDTO));
+    }
 
 }

@@ -37,4 +37,21 @@ public class Cliente {
     @NotNull
     private String localizacao;
 
+    public Cliente(String nome, String email, String telefone, String uf, String localizacao) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.uf = uf;
+        this.localizacao = localizacao;
+    }
+
+    public Cliente(String nome, String cnpj, String email, String telefone, String uf, String localizacao) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.email = email;
+        this.telefone = telefone;
+        this.uf = uf;
+        this.localizacao = localizacao;
+    }
+
 }
